@@ -17,7 +17,7 @@ sub appname {
     my $class = ref $self;
     if ( $class =~ m/^(.*?)::Config$/ ) {
         my $appname = $1;
-        return lc $appname;
+        return uc $appname;
     }
     else {
         die 'you need to name this class as YourApp::Config';
@@ -43,7 +43,7 @@ sub load_config {
     my %config;
 
     for my $file( @{$files} ) {
-        my $conf =  do $file->cleanup ;
+        my $conf =  do($file->cleanup) || {};
         die $@ if $@;
         %config = ( %config, %{$conf} );
     }
@@ -65,6 +65,7 @@ sub get_config_files {
     my $base = $home->file('etc/config.pl');
     push @files, $base;
 
+
     if ( my $env = $ENV{ $self->appname . '_ENV'} ) {
         my $filename = sprintf 'etc/config_%s.pl', $env;
         die "could not found local config file:" . $home->file($filename)  unless  -f $home->file($filename);
@@ -73,9 +74,5 @@ sub get_config_files {
     return \@files;
 }
 
-sub path_to {
-    my $class = shift;
-    $class->home->file(@_)->stringify;
-}
 
 1;
