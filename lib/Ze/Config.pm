@@ -2,7 +2,6 @@ package Ze::Config;
 use strict;
 use warnings;
 use Path::Class;
-use Plack::Util::Accessor qw(appname);
 use Ze::Util;
 
 sub instance {
@@ -13,11 +12,22 @@ sub instance {
     defined $$instance ? $$instance : ($$instance = $class->_new);
 }
 
+sub appname {
+    my $self = shift;
+    my $class = ref $self;
+    if ( $class =~ m/^(.*?)::Config$/ ) {
+        my $appname = $1;
+        return lc $appname;
+    }
+    else {
+        die 'you need to name this class as YourApp::Config';
+    }
+
+}
 sub _new {
     my $class = shift;
     my $self = bless {}, $class;
     $self->load_config;
-    $self->{appname} = Ze::Util::appname( $class );
     $self;
 }
 
@@ -55,7 +65,7 @@ sub get_config_files {
     my $base = $home->file('etc/config.pl');
     push @files, $base;
 
-    if ( my $env = $ENV{ uc $self->appname . '_ENV'} ) {
+    if ( my $env = $ENV{ $self->appname . '_ENV'} ) {
         my $filename = sprintf 'etc/config_%s.pl', $env;
         die "could not found local config file:" . $home->file($filename)  unless  -f $home->file($filename);
         push @files, $home->file( $filename );
