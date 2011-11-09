@@ -22,8 +22,7 @@ test_requires(
 );
 
 
-
-tests 't/*.t';
+tests_recursive
 
 build_requires 'Test::More';
 auto_include;
