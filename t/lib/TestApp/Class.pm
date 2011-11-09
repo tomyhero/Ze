@@ -3,4 +3,4 @@ use Ze::Class;
 
 sub string { 'マルチバイト'}
 
-END_OF_CLASS;
+EOC;

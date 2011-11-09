@@ -4,14 +4,14 @@ use Mouse::Exporter;
 use utf8;
 
 Mouse::Exporter->setup_import_methods(
-    as_is => ['END_OF_CLASS'],
+    as_is => ['EOC'],
     also => ['Mouse'],
 );
 
 sub init_meta { utf8->import(); }
 
 
-sub END_OF_CLASS {
+sub EOC {
     Mouse->unimport();
     caller->meta->make_immutable();
     return 1;
