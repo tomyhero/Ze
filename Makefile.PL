@@ -22,7 +22,7 @@ test_requires(
 );
 
 
-tests_recursive
+tests_recursive;
 
 build_requires 'Test::More';
 auto_include;
