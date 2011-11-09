@@ -9,13 +9,6 @@ subtest 'home ok' => sub {
 };
 
 
-subtest 'home ok' => sub {
-    my $self = shift;
-    my $home = TestApp::Config->home;
-    ok( $home =~ /\/t$/);
-};
-
-
 subtest 'intsance' => sub {
     my $config = TestApp::Config->instance();
     my $config2 = TestApp::Config->instance();
