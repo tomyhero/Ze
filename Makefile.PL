@@ -11,6 +11,9 @@ requires (
     'Mouse' => 0,
     'Plack' => 0,
     'Path::Class' => 0,
+    'JSON::XS' => 0,
+    'Encode::JavaScript::UCS' => 0,
+    'Text::Xslate' => 0,
 );
 
 

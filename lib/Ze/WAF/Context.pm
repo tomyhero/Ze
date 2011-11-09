@@ -1,15 +1,9 @@
 package Ze::WAF::Context;
-use Mouse;
+use Ze::Class;
 
 
 
 
 
 
-__PACKAGE__->meta->make_immutable();
-
-
-1;
-
-
-
+EOC;
