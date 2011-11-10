@@ -1,3 +1,9 @@
 package Ze::WAF::View;
+use Ze::Class;
 
-1;
+
+
+
+
+
+EOC;

@@ -18,7 +18,7 @@ subtest 'setup_controller' => sub {
     isa_ok($root,'TestApp::PC::Controller::Root');
 
     # obj ok
-    my $obj = $dispatcher->controllers->{'TestApp::PC::Controller::Root'};
+    my $obj = $dispatcher->controllers->{'Root'};
     isa_ok($obj,'TestApp::PC::Controller::Root');
 
 };

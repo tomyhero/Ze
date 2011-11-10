@@ -5,9 +5,11 @@ use Mouse::Util;
 use Try::Tiny;
 
 __PACKAGE__->mk_classdata('request_class' => 'Ze::WAF::Request');
+__PACKAGE__->mk_classdata('context_type' => 'text/html;charset=utf-8');
 
 has 'env' => ( is => 'rw' , required => 1 );
 has 'dispatcher' => ( is => 'rw');
+has 'view' => ( is => 'rw');
 has 'req' => ( is => 'rw' );
 has 'res' => ( is => 'rw' );
 has 'args' => ( is => 'rw' , default => sub { { } } );
@@ -31,6 +33,8 @@ sub setup_request {
 sub setup_response {
     my $c =  shift;
     $c->res( $c->req()->new_response );
+    $c->res->content_type( $c->context_type );
+    $c->res->code(200);
 }
 
 sub dispatch {
@@ -73,7 +77,7 @@ sub FINALIZE {
 sub not_found {
     my $c = shift;
     $c->res->status( 404 );
-    $c->body('NOT FOUND');
+    $c->res->body('NOT FOUND');
     $c->finished(1);
 }
 

@@ -4,4 +4,5 @@ extends 'Ze::WAF::Context';
 
 
 
-__PACKAGE__->meta->make_immutable();
+
+EOC;

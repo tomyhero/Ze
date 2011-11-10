@@ -31,7 +31,7 @@ sub setup_controller {
             }
             next if $seen{ $controller }++;
             my $pkg = Plack::Util::load_class( "Controller::" . $controller, $self->waf_class );
-            $controllers->{$pkg} = $pkg->new();
+            $controllers->{$controller} = $pkg->new();
         }
         $self->controllers($controllers);
     }

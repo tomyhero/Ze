@@ -4,32 +4,35 @@ use Mouse::Util;
 extends 'Ze::Component';
 
 __PACKAGE__->mk_classdata('context_class');
+__PACKAGE__->mk_classdata('dispatcher_class');
+__PACKAGE__->mk_classdata('view_class');
+
+has 'dispatcher' => ( is => 'rw');
 
 
 sub BUILD {
     my $self = shift;
-    $self->setup_request();
+    $self->setup_dispatcher();
+    $self->setup_view();
 }
 
-sub setup_request {
-    my $self = shift;
-    Mouse::Util::load_class( $self->request_class );
-}
 
 sub setup_config {
 
 }
-sub create_config {
 
-}
-sub setup_context {
-
-}
 sub setup_view {
-
+    my $self = shift;
+    Mouse::Util::load_class( $self->view_class) ;
+    my $view_obj= $self->view_class->new();
+    $self->view( $view_obj );
 }
-sub setup_dispatcher {
 
+sub setup_dispatcher {
+    my $self = shift;
+    Mouse::Util::load_class( $self->dispatcher_class) ;
+    my $dispatcher_obj = $self->dispatcher_class->new( waf_class => ref $self );
+    $self->dispatcher( $dispatcher_obj );
 }
 
 sub handler {
@@ -39,7 +42,6 @@ sub handler {
         my $env = shift;
         my $c = $self->prepare_context( $env );
         $c->dispatch();
-
     };
 
     return $app;
@@ -48,10 +50,7 @@ sub handler {
 sub prepare_context {
     my $self = shift;
     my $env = shift;
-    my $c = $self->context_class->new();
-    my $req = $self->request_class->new( $env );
-    $c->req($req);
-    $c->res($req->new_response);
+    my $c = $self->context_class->new( env => $env , dispatcher => $self->dispatcher );
     return $c;
 }
 
