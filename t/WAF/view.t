@@ -27,6 +27,8 @@ subtest 'body content' => sub {
     $view->render($c);
 
     is($c->res->body,"TEST : teranishi\n");
+    is($c->res->content_type,'text/html');
+    is($c->res->headers->content_type_charset,'UTF-8');
 
 };
 

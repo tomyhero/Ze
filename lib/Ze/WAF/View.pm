@@ -10,7 +10,7 @@ has default_type => (
 
 has mime_type => (
     is => 'rw',
-    default => 'text/html',
+    default => sub { { Xslate =>'text/html', JSON => 'application/json' }  }
 );
 
 has charset => (
