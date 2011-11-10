@@ -15,14 +15,7 @@ sub instance {
 sub appname {
     my $self = shift;
     my $class = ref $self;
-    if ( $class =~ m/^(.*?)::Config$/ ) {
-        my $appname = $1;
-        return uc $appname;
-    }
-    else {
-        die 'you need to name this class as YourApp::Config';
-    }
-
+    return uc Ze::Util::app_class( $class );
 }
 sub _new {
     my $class = shift;

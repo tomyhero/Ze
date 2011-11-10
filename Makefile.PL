@@ -14,6 +14,8 @@ requires (
     'JSON::XS' => 0,
     'Encode::JavaScript::UCS' => 0,
     'Text::Xslate' => 0,
+    'Class::Data::Inheritable' => 0,
+    'Router::Simple' => 0,
 );
 
 
