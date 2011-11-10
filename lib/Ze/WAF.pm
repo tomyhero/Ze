@@ -8,17 +8,20 @@ __PACKAGE__->mk_classdata('dispatcher_class');
 __PACKAGE__->mk_classdata('view_class');
 
 has 'dispatcher' => ( is => 'rw');
+has 'view' => ( is => 'rw');
 
 
 sub BUILD {
     my $self = shift;
     $self->setup_dispatcher();
     $self->setup_view();
+    $self->setup_context();
 }
 
 
-sub setup_config {
-
+sub setup_context {
+    my $self = shift;
+    Mouse::Util::load_class( $self->context_class) ;
 }
 
 sub setup_view {
@@ -37,20 +40,18 @@ sub setup_dispatcher {
 
 sub handler {
     my $self = shift;
-
     my $app = sub {
         my $env = shift;
         my $c = $self->prepare_context( $env );
         $c->dispatch();
     };
-
     return $app;
 }
 
 sub prepare_context {
     my $self = shift;
     my $env = shift;
-    my $c = $self->context_class->new( env => $env , dispatcher => $self->dispatcher );
+    my $c = $self->context_class->new( env => $env , dispatcher => $self->dispatcher , view => $self->view );
     return $c;
 }
 

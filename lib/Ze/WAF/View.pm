@@ -71,12 +71,14 @@ sub render {
     my $self = shift;
     my $c    = shift;
 
-    my $type  = $self->get_type($c);
-    $self->build_template( $c ,$type );
-    $self->build_stash( $c );
+    if(!length $c->res->body ) {
+        my $type  = $self->get_type($c);
+        $self->build_template( $c ,$type );
+        $self->build_stash( $c );
 
-    my $output = $self->do_render( $c , $type );
-    $self->build_response( $c , $output );
+        my $output = $self->do_render( $c , $type );
+        $self->build_response( $c , $output );
+    }
 
     return 1;
 }

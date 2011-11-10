@@ -64,7 +64,8 @@ sub dispatch {
 sub abort { die 'ZE_EXCEPTION_ABORT'; }
 
 sub RENDER {
-
+    my $c = shift;
+    $c->view->render($c);
 }
 
 sub FINALIZE {
