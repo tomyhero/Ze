@@ -8,4 +8,10 @@ sub index {
 }
 
 
+sub test {
+    my ($self,$c) = @_;
+    $c->res->content_type( 'text/html;charset=utf-8' );
+    $c->stash->{name} = 'teranishi';
+}
+
 EOC;

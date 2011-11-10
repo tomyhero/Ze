@@ -22,8 +22,6 @@ subtest 'body content' => sub {
     is_deeply($res, [
           200,
           [
-            'Content-Type',
-            'text/html;charset=utf-8'
           ],
           [
             'hello Ze'
