@@ -16,6 +16,11 @@ subtest 'setup_controller' => sub {
     # use ok
     my $root = TestApp::PC::Controller::Root->new();      
     isa_ok($root,'TestApp::PC::Controller::Root');
+
+    # obj ok
+    my $obj = $dispatcher->controllers->{'TestApp::PC::Controller::Root'};
+    isa_ok($obj,'TestApp::PC::Controller::Root');
+
 };
 
 subtest 'match' => sub {

@@ -9,6 +9,7 @@ has 'waf_class' => ( is => 'rw', required => 1 );
 has 'router' => ( is => 'rw');
 has 'home' => ( is => 'rw' , lazy_build => 1 );
 has 'config_file' => ( is => 'rw' , lazy_build => 1 );
+has 'controllers' => ( is => 'rw' , default => sub { {} } );
 
 sub BUILD {
     my $self = shift;
@@ -19,6 +20,7 @@ sub BUILD {
 sub setup_controller {
     my $self = shift;
     my $routes = $self->router->{routes};
+    my $controllers = {};
     if ($routes) {
         my %seen;
         foreach my $route (@$routes) {
@@ -28,8 +30,10 @@ sub setup_controller {
                 warn "No controller specified for path " . $route->pattern;
             }
             next if $seen{ $controller }++;
-            Plack::Util::load_class( "Controller::" . $controller, $self->waf_class );
+            my $pkg = Plack::Util::load_class( "Controller::" . $controller, $self->waf_class );
+            $controllers->{$pkg} = $pkg->new();
         }
+        $self->controllers($controllers);
     }
 }
 
