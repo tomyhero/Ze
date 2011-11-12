@@ -14,4 +14,10 @@ sub test {
     $c->stash->{name} = 'teranishi';
 }
 
+
+sub ja {
+    my ($self,$c) = @_;
+    $c->stash->{name} = '日本語';
+}
+
 EOC;

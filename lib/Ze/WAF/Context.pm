@@ -5,6 +5,7 @@ use Mouse::Util;
 use Try::Tiny;
 
 __PACKAGE__->mk_classdata('request_class' => 'Ze::WAF::Request');
+__PACKAGE__->mk_classdata('context_config' => {} );
 
 has 'env' => ( is => 'rw' , required => 1 );
 has 'dispatcher' => ( is => 'rw');
@@ -14,6 +15,8 @@ has 'res' => ( is => 'rw' );
 has 'stash' => ( is => 'rw' , default => sub { {} } );
 has 'args' => ( is => 'rw' , default => sub { { } } );
 has 'finished' => ( is => 'rw' , default => 0 );
+
+with 'Ze::Role::Pluggable';
 
 
 sub BUILD {
@@ -46,8 +49,9 @@ sub dispatch {
     }
 
     my $controller_obj = $c->dispatcher->controllers->{$controller};
-
+    $c->INITIALIZE;
     try {
+        $c->PREPARE;
         $controller_obj->EXCECUTE( $c ,$action ); 
     }
     catch {
@@ -62,6 +66,9 @@ sub dispatch {
 }
 
 sub abort { die 'ZE_EXCEPTION_ABORT'; }
+
+sub INITIALIZE{ }
+sub PREPARE { } 
 
 sub RENDER {
     my $c = shift;
