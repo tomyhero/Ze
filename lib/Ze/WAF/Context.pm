@@ -89,4 +89,14 @@ sub not_found {
     $c->finished(1);
 }
 
+sub redirect {
+    my( $c, $url, $code ) = @_;
+    $code ||= 302;
+    $c->res->status( $code );
+    $c->res->redirect( $url );
+    #$url = ($url =~ m{^https?://}) ? $url : $c->uri_for( $url );
+    #$c->res->headers->header(Location => $url);
+    $c->finished(1);
+}
+
 EOC;
