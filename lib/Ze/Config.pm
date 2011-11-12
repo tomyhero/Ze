@@ -49,7 +49,11 @@ sub load_config {
     \%config;
 }
 
-sub home { die 'ABSTRACT METHOD' }
+sub home { 
+    my $self = shift;
+    my $class = ref $self ? ref $self : $self;;
+    Ze::Util::home($class);
+}
 
 sub get_config_files {
     my $self = shift;
