@@ -38,7 +38,7 @@ sub setup_dispatcher {
     $self->dispatcher( $dispatcher_obj );
 }
 
-sub handler {
+sub to_app {
     my $self = shift;
     my $app = sub {
         my $env = shift;

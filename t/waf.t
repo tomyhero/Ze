@@ -11,7 +11,7 @@ isa_ok($app,'TestApp::PC');
 
 
 test_psgi 
-    app => $app->handler(),
+    app => $app->to_app(),
     client => sub {
         my $cb  = shift;
         my $req = HTTP::Request->new(GET => "http://localhost/");
@@ -20,7 +20,7 @@ test_psgi
     };
 
 test_psgi 
-    app => $app->handler(),
+    app => $app->to_app(),
     client => sub {
         my $cb  = shift;
         my $req = HTTP::Request->new(GET => "http://localhost/test");
