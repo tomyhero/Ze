@@ -1,15 +1,15 @@
 package Ze::WAF;
 use Ze::Class;
 use Mouse::Util;
-extends 'Ze::Component';
 
-__PACKAGE__->mk_classdata('context_class');
-__PACKAGE__->mk_classdata('dispatcher_class');
-__PACKAGE__->mk_classdata('view_class');
 
 has 'dispatcher' => ( is => 'rw');
 has 'view' => ( is => 'rw');
 
+has ['context_class','dispatcher_class','view_class'] => (
+    is => 'rw',
+    lazy_build => 1,
+);
 
 sub BUILD {
     my $self = shift;
@@ -18,22 +18,43 @@ sub BUILD {
     $self->setup_context();
 }
 
+sub _build_context_class {
+    my $self = shift;
+    my $class = ref $self;
+    my $pkg = $class . '::Context';
+    Mouse::Util::load_class( $pkg ) ;
+    return $pkg;
+}
+
+sub _build_dispatcher_class {
+    my $self = shift;
+    my $class = ref $self;
+    my $pkg = $class . '::Dispatcher';
+    Mouse::Util::load_class( $pkg ) ;
+    return $pkg;
+}
+
+sub _build_view_class {
+    my $self = shift;
+    my $class = ref $self;
+    my $pkg = $class . '::View';
+    Mouse::Util::load_class( $pkg ) ;
+    return $pkg;
+}
 
 sub setup_context {
     my $self = shift;
-    Mouse::Util::load_class( $self->context_class) ;
+    $self->context_class;
 }
 
 sub setup_view {
     my $self = shift;
-    Mouse::Util::load_class( $self->view_class) ;
     my $view_obj= $self->view_class->new();
     $self->view( $view_obj );
 }
 
 sub setup_dispatcher {
     my $self = shift;
-    Mouse::Util::load_class( $self->dispatcher_class) ;
     my $dispatcher_obj = $self->dispatcher_class->new( waf_class => ref $self );
     $self->dispatcher( $dispatcher_obj );
 }

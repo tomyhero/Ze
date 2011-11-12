@@ -7,6 +7,7 @@ use Mouse::Util;
 # SPEC. Application Class must be top level pacakge name
 sub app_class {
     my $class = shift;
+    $class = ref $class if ref $class;
     my ($app_class ) = $class =~ m/^([a-zA-Z0-9_]+)::/;
     return $app_class;
 }
