@@ -88,7 +88,7 @@ sub do_render {
     my $self  = shift;
     my $c     = shift;
     my $type  = shift;
-    $self->engine->render( $type, { vars => $c->stash ,file => $c->stash->{VIEW_TEMPLATE} } );
+    $self->engine->render( $type, { vars => $c->stash ,file => $c->template  } );
 }
 
 
@@ -102,11 +102,11 @@ sub build_template {
     my $c    = shift;
     my $type = shift;
 
-    unless( $c->stash->{VIEW_TEMPLATE} ) {
+    unless( $c->template  ) {
         my $path = $c->req->path_info;
         $path .= 'index' if $path =~ m{/$};
         $path =~ s{^/}{};
-        $c->stash->{'VIEW_TEMPLATE'} = $path;
+        $c->template( $path);
     }
 }
 
