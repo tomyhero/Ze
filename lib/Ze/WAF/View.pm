@@ -88,7 +88,14 @@ sub do_render {
     my $self  = shift;
     my $c     = shift;
     my $type  = shift;
-    $self->engine->render( $type, { vars => $c->stash ,file => $c->template  } );
+    my $stash ;
+    if($type eq 'JSON'){
+        $stash = $c->stash->{VIEW_TEMPLATE_VARS} || {};
+    }
+    else {
+        $stash = $c->stash;
+    }
+    $self->engine->render( $type, { vars => $stash ,file => $c->template  } );
 }
 
 
