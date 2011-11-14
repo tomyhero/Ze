@@ -10,7 +10,7 @@ subtest 'json' => sub {
 };
 
 subtest 'ucs' => sub {
-    is( $engine->render( { vars => {hoge => 'あ' } } ), '{"hoge":"\u00e3\u0081\u0082"}');
+    is( $engine->render( { vars => {hoge => 'あ' } } ), '{"hoge":"\u3042"}');
 };
 
 subtest 'IE6' => sub {
