@@ -61,7 +61,7 @@ sub BUILD {
 sub get_type {
     my $self = shift;
     my $c = shift;
-    my $type = $c->template_type || $self->default_type ;
+    my $type = $c->view_type || $self->default_type ;
     return $type;
 }
 

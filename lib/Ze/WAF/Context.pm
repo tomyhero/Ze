@@ -13,7 +13,7 @@ has 'view' => ( is => 'rw');
 has 'req' => ( is => 'rw' );
 has 'res' => ( is => 'rw' );
 has 'template' => ( is => 'rw');
-has 'template_type' => ( is => 'rw');
+has 'view_type' => ( is => 'rw');
 has 'stash' => ( is => 'rw' , default => sub { {} } );
 has 'args' => ( is => 'rw' , default => sub { { } } );
 has 'finished' => ( is => 'rw' , default => 0 );
