@@ -5,7 +5,7 @@ has 'name' => ( is => 'rw', lazy_build => 1);
 has 'engine'         => ( is => 'rw', lazy_build => 1);
 has 'default_config' => ( is => 'rw', lazy_build => 1);
 has 'config'         => ( is => 'rw', default => sub { {} } );
-has 'extention'      => ( is => 'rw', default => '.tmpl' );
+has 'extension'      => ( is => 'rw', default => '.tmpl' );
 
 
 sub _build_engine {

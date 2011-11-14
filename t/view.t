@@ -21,6 +21,6 @@ isa_ok( $view->engine('Xslate'),'Ze::View::Xslate');
 is($view->render('JSON',{ vars => { hoge => 'hoge' } } ),'{"hoge":"hoge"}');
 is($view->render('Xslate',{ file => 'test', vars => { name => 'hoge' } } ),"TEST : hoge\n");
 
-is($view->get_extention('Xslate'),'.tx');
+is($view->get_extension('Xslate'),'.tx');
 
 done_testing;

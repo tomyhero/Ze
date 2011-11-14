@@ -3,7 +3,7 @@ use Ze::Class;
 use base qw(Ze::View::Base);
 use Text::Xslate;
 
-has '+extention' => ( default => '.tx' );
+has '+extension' => ( default => '.tx' );
 
 sub render {
     my $self = shift ;
@@ -11,7 +11,7 @@ sub render {
      my $vars = $args->{vars} || {};
     my $out = '';
     if ( my $file = $args->{file} ) {
-        $file .= $self->extention;
+        $file .= $self->extension;
         $out = $self->engine->render( $file , $vars ) ;
     }
     return $out;

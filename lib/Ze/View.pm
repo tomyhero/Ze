@@ -48,10 +48,10 @@ sub render {
     return $engine->render( $args );
 }
 
-sub get_extention {
+sub get_extension {
     my $self = shift;
     my $type = shift;
-    my $engine = $self->engine( $type )->extention;
+    my $engine = $self->engine( $type )->extension;
 }
 
 

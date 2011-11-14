@@ -1,5 +1,6 @@
 package Ze::WAF;
 use Ze::Class;
+use Ze;
 use Mouse::Util;
 
 
@@ -63,6 +64,7 @@ sub to_app {
     my $self = shift;
     my $app = sub {
         my $env = shift;
+        local $Ze::GLOBAL = {};
         my $c = $self->prepare_context( $env );
         $c->dispatch();
     };
