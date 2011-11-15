@@ -16,6 +16,7 @@ requires (
     'Text::Xslate' => 0,
     'Class::Data::Inheritable' => 0,
     'Router::Simple' => 0,
+    'String::Random' => 0,
 );
 
 
