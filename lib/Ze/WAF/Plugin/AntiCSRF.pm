@@ -16,7 +16,7 @@ has 'AntiCSRF_token_value' =>  ( is => 'rw');
 
 sub __AntiCSRF_set_token {
     my $c = shift;
-    my $token_name = $c->__AntiCSRF_set_token;
+    my $token_name = $c->AntiCSRF_token_name;
 
 
     unless( $c->can('create_session') ) {
@@ -41,7 +41,7 @@ sub __AntiCSRF_set_token {
 
 sub abort_CSRF {
     my $c = shift;
-    my $token_name = $c->__AntiCSRF_set_token;
+    my $token_name = $c->AntiCSRF_token_name;
 
     unless( $c->can('create_session') ) {
         die 'implement $c->create_session() please';

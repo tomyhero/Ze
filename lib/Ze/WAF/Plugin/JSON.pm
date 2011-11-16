@@ -23,13 +23,13 @@ sub set_json_error {
         $args = $addition;
         $args->{error} = 1;
     }
-    if($v_res){
-        $args->{reason}{missing} = $v_res->missing if $v_res->missing;
-        $args->{reason}{invalid} = [keys %{$v_res->invalid}] if
-$v_res->invalid;
-        $args->{reason}{custom_invalid} = [keys %{$v_res->custom_invalid}] if
-$v_res->custom_invalid;
+    if($v_res && ref $v_res){
+        $args->{error_keys} = $v_res->error_keys;
     }
+    elsif($v_res) {
+        $args->{error_keys} = [ $v_res ];
+    }
+
     $c->stash->{VIEW_TEMPLATE_VARS} = $args;
     $c->_set_json_callback_if();
 }
