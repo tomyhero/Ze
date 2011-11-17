@@ -35,6 +35,15 @@ subtest 'body content' => sub {
 };
 
 
+subtest 'config' => sub {
+    my $req = HTTP::Request->new( GET => 'http://localhost/' );
+    my $env = $req->to_psgi;
+    my $c = TestApp::WAF::Context->new( dispatcher => $dispatcher , env => $env , view => $view );
+
+    is($c->config->get('name'),'origin');
+
+};
+
 subtest 'not found' => sub {
 
     my $req = HTTP::Request->new( GET => 'http://localhost/not-found/' );

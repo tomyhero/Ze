@@ -10,8 +10,8 @@ sub load_plugin {
 
 sub load_plugins {
     my ( $self, @roles ) = @_;
-    $self->_load_and_apply_role(@roles) ;
-    return \@roles;
+    $self->_load_and_apply_role(reverse @roles) ;
+    1;
 }
 
 sub _load_and_apply_role {

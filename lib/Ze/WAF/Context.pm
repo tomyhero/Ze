@@ -1,6 +1,7 @@
 package Ze::WAF::Context;
 use Ze::Class;
 extends 'Ze::Component';
+use Ze::Util;
 use Mouse::Util;
 use Try::Tiny;
 
@@ -17,6 +18,7 @@ has 'view_type' => ( is => 'rw');
 has 'stash' => ( is => 'rw' , default => sub { {} } );
 has 'args' => ( is => 'rw' , default => sub { { } } );
 has 'finished' => ( is => 'rw' , default => 0 );
+has 'config' => (is => 'rw', lazy_build => 1 );
 
 with 'Ze::Role::Pluggable';
 
@@ -27,6 +29,9 @@ sub BUILD {
     $c->setup_response;
 }
 
+sub _build_config{
+    return Ze::Util::config(shift);
+}
 
 sub setup_request {
     my $c =  shift;
@@ -43,6 +48,8 @@ sub setup_response {
 
 sub dispatch {
     my $c = shift;
+    $c->INITIALIZE;
+
     my ($controller,$action) = $c->dispatcher->match( $c );
 
     if ( !$controller or !$action ) {
@@ -51,7 +58,7 @@ sub dispatch {
     }
 
     my $controller_obj = $c->dispatcher->controllers->{$controller};
-    $c->INITIALIZE;
+
     try {
         $c->PREPARE;
         $controller_obj->EXCECUTE( $c ,$action ); 
