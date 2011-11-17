@@ -9,3 +9,9 @@ Mouse::Exporter->setup_import_methods(
 );
           
 1;
+
+=head1 NAME
+
+Ze::Role - same as Mouse Role.
+
+=cut

@@ -73,3 +73,26 @@ sub get_config_files {
 
 
 1;
+
+=head1 NAME
+
+Ze::Config - Config Class.
+
+=head1 SYNOPSYS
+
+ package MyApp::Config;
+ use parent 'Ze::Config';
+ 1;
+
+etc/config.pl
+ 
+ return {
+    name => 'teranishi',
+ };
+
+
+ my $config = MyApp::Config->instance();
+ $config->get('name');
+
+
+=cut

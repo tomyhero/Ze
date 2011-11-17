@@ -36,3 +36,9 @@ sub data2key {
 }
 
 1;
+
+=head1 NAME
+
+Ze::Util - utility 
+
+=cut

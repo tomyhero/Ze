@@ -56,3 +56,9 @@ sub get_extension {
 
 
 EOC;
+
+=head1 NAME
+
+Ze::View - view 
+
+=cut

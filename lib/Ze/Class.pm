@@ -19,3 +19,9 @@ sub EOC {
 
 
 1;
+
+=head1 NAME
+
+Ze::Class - this is Mouse 
+
+=cut

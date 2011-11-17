@@ -3,14 +3,9 @@ use Ze::Class;
 use Ze;
 use Mouse::Util;
 
-
 has 'dispatcher' => ( is => 'rw');
 has 'view' => ( is => 'rw');
-
-has ['context_class','dispatcher_class','view_class'] => (
-    is => 'rw',
-    lazy_build => 1,
-);
+has ['context_class','dispatcher_class','view_class'] => ( is => 'rw', lazy_build => 1);
 
 sub BUILD {
     my $self = shift;
@@ -18,6 +13,7 @@ sub BUILD {
     $self->setup_view();
     $self->setup_context();
 }
+
 
 sub _build_context_class {
     my $self = shift;
@@ -42,6 +38,8 @@ sub _build_view_class {
     Mouse::Util::load_class( $pkg ) ;
     return $pkg;
 }
+
+
 
 sub setup_context {
     my $self = shift;
@@ -80,3 +78,22 @@ sub prepare_context {
 
 
 EOC;
+
+
+=head1 NAME
+
+Ze::WAF - WAF 
+
+=head1 SYNOPSYS
+
+ package MyApp::PC;
+ use Ze::Class;
+ extends 'Ze::WAF';
+
+ 1;
+
+ my $webapp = MyApp::PC->new();
+ my $app  = $webapp->to_app(); #psgi app
+
+
+=cut
