@@ -10,7 +10,7 @@ before 'PREPARE' => sub {
 
 };
 
-has '__AntiCSRF_cookie_expires' =>  ( is => 'rw', default => time + 60 * 60  );
+has '__AntiCSRF_cookie_expires' =>  ( is => 'rw', default =>  60 * 60  );
 has 'AntiCSRF_token_name' =>  ( is => 'rw', default => 'anticsrf_token' );
 has 'AntiCSRF_token_value' =>  ( is => 'rw');
 
@@ -33,7 +33,7 @@ sub __AntiCSRF_set_token {
     $c->res->cookies->{$token_name} = { 
         value => $token,
         path  => "/",
-        expires => $c->__AntiCSRF_cookie_expires,
+        expires => time + $c->__AntiCSRF_cookie_expires,
     };
 
     $c->AntiCSRF_token_value( $token );
