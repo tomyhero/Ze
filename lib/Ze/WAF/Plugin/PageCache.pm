@@ -6,11 +6,9 @@ has '__PageCache_cache_obj' => ( is => 'rw' , required => 1 );
 
 before 'PREPARE' => sub {
         my( $c ) = @_;
-
-        return if $c->config->get('Plugin::PageCache') && $c->config->get('Plugin::PageCache')->{skip_cache}; 
+        return unless  $c->req->method eq 'GET';
 
         my $page_cache = $c->args->{page_cache} or return;
-
 
         my $cache = $c->__PageCache_cache_obj();
 
@@ -27,7 +25,7 @@ before 'PREPARE' => sub {
 
 after 'RENDER' => sub {
         my $c = shift;
-        return if $c->config->get('Plugin::PageCache') && $c->config->get('Plugin::PageCache')->{skip_cache}; 
+        return unless  $c->req->method eq 'GET';
         return unless $c->res->code eq 200;
 
         my $page_cache = $c->args->{page_cache} or return;
