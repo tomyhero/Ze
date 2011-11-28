@@ -27,8 +27,9 @@ before 'FINALIZE' => sub {
 
 sub _decode {
     my ($hmv, $ie) = @_;
-    for my $key( $hmv->keys ) {
+    for my $key( keys %$hmv ) {
         my @values = map { Encode::decode($ie, $_) } $hmv->get_all( $key );
+
         $hmv->remove( $key );
         $hmv->add( $key => @values );
     }

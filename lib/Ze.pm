@@ -1,7 +1,7 @@
 package Ze;
 use warnings;
 use strict;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 our $GLOBAL = {}; # using for request scorp variale storage
 
 1;
