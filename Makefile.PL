@@ -17,6 +17,7 @@ requires (
     'Class::Data::Inheritable' => 0,
     'Router::Simple' => 0,
     'String::Random' => 0,
+    'HTML::FillInForm::Lite' => 0,
 );
 
 
