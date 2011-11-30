@@ -45,6 +45,8 @@ after 'prepare_context' => sub {
  use Ze::Util;
  use Term::ANSIColor;;
  use utf8;
+ no warnings;
+
  sub new {
     my $class = shift;
     my $self = bless {},$class;
@@ -96,7 +98,7 @@ after 'prepare_context' => sub {
     for(sort keys %{$self->controllers}){
         $t2->row($_);
     }
-    print color 'bold yellow';
+    print color 'yellow';
     print $t2->draw;
     print color 'blue';
     print $t1->draw;
@@ -125,7 +127,7 @@ after 'prepare_context' => sub {
 
 
     if(keys %{$c->args}){
-        my $t3 = Text::SimpleTable->new([10,'ARGS'], [$column_width - 8 ,'VALUE']);
+        my $t3 = Text::SimpleTable->new([20,'ARGS'], [$column_width - 18 ,'VALUE']);
         for my $key ( sort keys %{$c->args}) {
             my $param = $c->args->{$key};
             my $value = defined($param) ? $param : '';
@@ -137,7 +139,7 @@ after 'prepare_context' => sub {
 
     my $fdat = $c->req->as_fdat;
     if(keys %$fdat){
-    my $t2 = Text::SimpleTable->new([10,'PARAMETER'], [$column_width - 8,'VALUE']);
+    my $t2 = Text::SimpleTable->new([20,'PARAMETER'], [$column_width - 18,'VALUE']);
         for my $key ( sort keys %$fdat) {
             my $param = $fdat->{$key};
             my $value = defined($param) ? $param : '';
