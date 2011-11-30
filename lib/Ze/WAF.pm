@@ -2,10 +2,12 @@ package Ze::WAF;
 use Ze::Class;
 use Ze;
 use Mouse::Util;
+with 'Ze::Role::Pluggable';
 
 has 'dispatcher' => ( is => 'rw');
 has 'view' => ( is => 'rw');
 has ['context_class','dispatcher_class','view_class'] => ( is => 'rw', lazy_build => 1);
+
 
 sub BUILD {
     my $self = shift;

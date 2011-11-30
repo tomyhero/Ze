@@ -18,6 +18,9 @@ requires (
     'Router::Simple' => 0,
     'String::Random' => 0,
     'HTML::FillInForm::Lite' => 0,
+    'Text::SimpleTable' => 0,
+    'Term::Size::Any' => 0, # remocmend..
+    'Term::ANSIColor' => 0,
 );
 
 

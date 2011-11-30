@@ -35,6 +35,26 @@ sub data2key {
 
 }
 
+# from catlyst
+sub term_width {
+
+    my $width = eval '
+        use Term::Size::Any;
+        my ($columns, $rows) = Term::Size::Any::chars;
+        return $columns;
+    ';
+
+    if ($@) {
+        $width = $ENV{COLUMNS}
+            if exists($ENV{COLUMNS})
+            && $ENV{COLUMNS} =~ m/^\d+$/;
+    }
+
+    $width = 80 unless ($width && $width >= 80);
+    return  $width;
+}
+
+
 1;
 
 =head1 NAME
