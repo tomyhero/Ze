@@ -47,6 +47,8 @@ after 'prepare_context' => sub {
  use utf8;
  no warnings;
 
+ our $LEVEL = 1;
+
  sub new {
     my $class = shift;
     my $self = bless {},$class;
@@ -99,13 +101,15 @@ after 'prepare_context' => sub {
         $t2->row($_);
     }
     print color 'yellow';
-    print $t2->draw;
+    print $t2->draw if $LEVEL > 2;
     print color 'blue';
-    print $t1->draw;
+    print $t1->draw if $LEVEL > 1;
     print color 'reset';
  }
  sub notice_waf_memory {
     my $self = shift;
+    return if $LEVEL < 3;
+
     my $column_width = Ze::Util::term_width() - 15;
     my $t1 = Text::SimpleTable->new([$column_width,'WAF SIZE']);
     $t1->row(total_size($self->parent));
@@ -164,7 +168,7 @@ after 'prepare_context' => sub {
     
     
     print color 'blue';
-    print $t1->draw();
+    print $t1->draw() if $LEVEL > 2;
     print color 'reset';
  }
 
