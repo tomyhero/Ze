@@ -22,6 +22,7 @@ requires (
     'Text::SimpleTable' => 0,
     'Term::Size::Any' => 0, # remocmend..
     'Term::ANSIColor' => 0,
+    'App::Cmd' => 0,
 );
 
 
