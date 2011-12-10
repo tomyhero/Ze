@@ -150,6 +150,7 @@ file: bin/devel/setup.sh
 template: |+
   #!/bin/bash
   
+  set -e;
   
   APP_HOME='.'
   MYRC=$HOME/.`basename $SHELL`rc
@@ -158,7 +159,7 @@ template: |+
   
   if [ ! -f $APP_HOME/bin/devel/setup.sh ]; then
       echo 'you must excute this script from application home directory!! like a ./bin/devel/setup.sh'
-      exit(0);
+      exit;
   fi
   
   
