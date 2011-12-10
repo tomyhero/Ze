@@ -23,6 +23,8 @@ requires (
     'Term::Size::Any' => 0, # remocmend..
     'Term::ANSIColor' => 0,
     'App::Cmd' => 0,
+    'Module::Setup' => 0,
+    'FindBin::libs' => 0,
 );
 
 
@@ -32,6 +34,7 @@ test_requires(
 
 
 tests_recursive;
+install_script glob('bin/ze-setup');
 
 build_requires 'Test::More';
 auto_include;
