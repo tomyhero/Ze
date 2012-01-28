@@ -2,7 +2,7 @@ package Ze::WAF::Controller;
 use Ze::Class;
 
 
-sub EXCECUTE {
+sub EXECUTE {
     my( $self, $c, $action ) = @_;
     $self->$action( $c );
     return 1;

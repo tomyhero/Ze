@@ -12,7 +12,7 @@ sub render {
     my $args = shift;
     my $vars = $args->{vars} || {};
     my $out = '';
-    my $json = encode( 'JavaScript-UCS', decode('utf8',encode_json( $vars ) ) );
+    my $json = $args->{pretty} ?  encode( 'JavaScript-UCS', decode('utf8',JSON::XS->new->pretty(1)->encode( $vars ) ) ) : encode( 'JavaScript-UCS', decode('utf8',encode_json( $vars ) ) );
 
     # IE6 XSS
     $json =~s/</\\u003c/g;

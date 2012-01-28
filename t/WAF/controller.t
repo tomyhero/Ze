@@ -9,7 +9,7 @@ my $controller = TestApp::PC::Controller::Root->new();
 
 my $c = TestApp::WAF::Context->new( env => { REQUEST_METHOD => 'GET', PATH_INFO => '/', HTTP_HOST => 'localhost'} );
 
-$controller->EXCECUTE( $c,'index');
+$controller->EXECUTE( $c,'index');
 
 is($c->res->body, 'hello Ze');
 

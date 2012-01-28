@@ -61,7 +61,7 @@ sub dispatch {
 
     try {
         $c->PREPARE;
-        $controller_obj->EXCECUTE( $c ,$action ); 
+        $controller_obj->EXECUTE( $c ,$action ); 
     }
     catch {
         die $_ unless /^ZE_EXCEPTION_ABORT/;
