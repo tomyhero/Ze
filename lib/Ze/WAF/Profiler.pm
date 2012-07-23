@@ -47,6 +47,8 @@ after 'prepare_context' => sub {
  use utf8;
  no warnings;
 
+ $Devel::Size::warn = 0;
+
  our $LEVEL = 1;
 
  sub new {
