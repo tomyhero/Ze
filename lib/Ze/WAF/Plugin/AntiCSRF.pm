@@ -10,7 +10,7 @@ before 'PREPARE' => sub {
 
 };
 
-has '__AntiCSRF_cookie_expires' =>  ( is => 'rw', default =>  60 * 60  );
+has '__AntiCSRF_cookie_expires' =>  ( is => 'rw', default =>  10 * 60 * 60  );
 has 'AntiCSRF_token_name' =>  ( is => 'rw', default => 'anticsrf_token' );
 has 'AntiCSRF_token_value' =>  ( is => 'rw');
 
