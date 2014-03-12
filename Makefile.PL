@@ -26,7 +26,8 @@ requires (
     'Module::Setup' => 0,
     'FindBin::libs' => 0,
     'UNIVERSAL::require' => 0,
-    'Class::Accessor::Fast' => 0
+    'Class::Accessor::Fast' => 0,
+    'Class::Trigger' => 0,
 );
 
 

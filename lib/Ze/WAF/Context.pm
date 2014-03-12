@@ -57,7 +57,8 @@ sub dispatch {
         return $c->FINALIZE;
     }
 
-    my $controller_obj = $c->dispatcher->controllers->{$controller};
+    #my $controller_obj = $c->dispatcher->controllers->{$controller};
+    my $controller_obj = $c->dispatcher->controllers->{$controller}->new;
 
     try {
         $c->PREPARE;

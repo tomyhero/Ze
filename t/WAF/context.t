@@ -1,4 +1,5 @@
 use Test::More;
+use lib 'lib';
 use lib 't/lib';
 use TestApp::WAF::Dispatcher::Router;
 use TestApp::PC::View;
@@ -24,6 +25,10 @@ subtest 'body content' => sub {
     is_deeply($res, [
           200,
           [
+          'Content-Type',
+          'text/json',
+          'Hoge',
+          'hoge'
           ],
           [
             'hello Ze'

@@ -1,4 +1,5 @@
 use Test::More;
+use lib 'lib';
 use lib 't/lib';
 use TestApp::WAF::Context;
 
@@ -12,5 +13,7 @@ my $c = TestApp::WAF::Context->new( env => { REQUEST_METHOD => 'GET', PATH_INFO 
 $controller->EXECUTE( $c,'index');
 
 is($c->res->body, 'hello Ze');
+is($c->res->content_type,'text/json');
+is($c->res->header('hoge'),'hoge');
 
 done_testing();
