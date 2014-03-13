@@ -4,14 +4,14 @@ extends 'Ze::WAF::Controller';
 use Class::Trigger;
 
 __PACKAGE__->add_trigger(
-  BEFORE_DISPATCH => sub {
+  BEFORE_EXECUTE => sub {
     my ($self,$c,$action) = @_; 
     $c->res->content_type('text/json'); 
   }
 );
 
 __PACKAGE__->add_trigger(
-  AFTER_DISPATCH => sub {
+  AFTER_EXECUTE => sub {
     my ($self,$c,$action) = @_; 
     $c->res->header('hoge' => 'hoge'); 
   }
