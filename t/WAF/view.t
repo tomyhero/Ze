@@ -29,8 +29,20 @@ subtest 'body content' => sub {
     is($c->res->body,"TEST : teranishi\n");
     is($c->res->content_type,'text/html');
     is($c->res->headers->content_type_charset,'UTF-8');
-
 };
 
+subtest 'body content' => sub {
+    my $req = HTTP::Request->new( GET => 'http://localhost/test' );
+    my $env = $req->to_psgi;
+    my $c = TestApp::WAF::Context->new( dispatcher => $dispatcher , env => $env );
+    $c->stash->{name} = 'teranishi';
+
+    $c->res->body(0);
+    $view->render($c);
+
+    is($c->res->body,"0");
+    is($c->res->content_type,'');
+    is($c->res->headers->content_type_charset, undef);
+};
 
 done_testing();

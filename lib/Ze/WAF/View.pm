@@ -71,7 +71,7 @@ sub render {
     my $self = shift;
     my $c    = shift;
 
-    if(!length $c->res->body ) {
+    if ( ! defined $c->res->body ) {
         my $type  = $self->get_type($c);
         $self->build_template( $c ,$type );
         $self->build_stash( $c );
