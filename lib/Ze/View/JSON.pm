@@ -6,6 +6,7 @@ use JSON::XS;
 use Encode;
 use Encode::JavaScript::UCS;
 use Carp qw/croak/;
+$Carp::CarpLevel = 1;
 
 sub render {
     my $self = shift;

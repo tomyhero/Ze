@@ -22,10 +22,4 @@ subtest 'callback' => sub {
     is( $engine->render( { callback => 'foo' ,vars => {hoge => 'hoge' } } ), 'foo({"hoge":"hoge"})');
 };
 
-subtest 'lay a trip on caller' => sub {
-    my $value = 1;
-    $value = bless \$value;
-    throws_ok { $engine->render( { vars => { key => $value } } ) } qr/t\/View\/json\.t/, 'caller';
-};
-
 done_testing();
