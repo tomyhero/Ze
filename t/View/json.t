@@ -1,4 +1,5 @@
 use Test::More;
+use Test::Exception;
 use utf8;
 
 use_ok('Ze::View::JSON');
