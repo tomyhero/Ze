@@ -6422,6 +6422,12 @@ template: |
 file: t/root/config/config.pl
 template: |
   {
+    debug => 1,
+    url => {
+      api => 'http://localhost:5000/api',
+      explorer => 'http://localhost:5000/explorer',
+      op => 'http://localhost:5000/op',
+    },
     cache => {
       servers => ['127.0.0.1:11211'],
     },
