@@ -58,6 +58,7 @@ template: |
   requires (
     "Ze" => 0.04,
     "Aplon" => 0,
+    "DBD::mysql" => 0,
     "Devel::KYTProf" => 0,
     "Proc::Guard" => 0,
     "HTTP::Session" => 0,
@@ -5099,6 +5100,13 @@ template: |
     INDEX(operator_id),
     INDEX(operation_type,criteria_code)
   ) ENGINE=InnoDB DEFAULT CHARACTER SET = 'utf8';
+---
+file: misc/dbuser.sql
+template: |
+  CREATE USER 'dev_master'@'localhost' IDENTIFIED BY '';
+  GRANT ALL PRIVILEGES ON * . * TO 'dev_master'@'localhost';
+  CREATE USER 'dev_slave'@'localhost' IDENTIFIED BY '';
+  GRANT SELECT ON * . * TO 'dev_slave'@'localhost';
 ---
 file: misc/asset-sample/config/config.pl
 template: |
