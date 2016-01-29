@@ -23,6 +23,7 @@ requires (
     'Term::Size::Any' => 0, # remocmend..
     'Term::ANSIColor' => 0,
     'App::Cmd' => 0,
+    "JSON" => 0, # for skiping Module::Setup install fail
     'Module::Setup' => 0,
     'FindBin::libs' => 0,
     'UNIVERSAL::require' => 0,
